@@ -1,0 +1,46 @@
+#quick setup using fastapi and taking in the given routers. depending on commit version not all routers may be prsent yet
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from .routers import accounts, posts, moderation, crisis, boards
+from .init_db import init_db
+from .config import settings
+
+app = FastAPI(
+    title="LEN - Community Support Backend",
+    description="Backend API for LEN patient support platform",
+    version="0.1.0",
+)
+
+# Middleware for frontend to integrating with backend 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origins_list,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+#including the routers here
+app.include_router(accounts.router, prefix="/accounts", tags=["accounts"])
+app.include_router(posts.router, prefix="/posts", tags=["posts"])
+app.include_router(moderation.router, prefix="/moderation", tags=["moderation"])
+app.include_router(crisis.router, prefix="/crisis", tags=["crisis"])
+app.include_router(boards.router, prefix="/boards", tags=["boards"])
+
+@app.get("/")
+def root():
+    return {
+        "message": "LEN Backend API",
+        "status": "running",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+@app.on_event("startup")
+def startup_event():
+    # Ensure tables exist and seed boards
+    init_db()
