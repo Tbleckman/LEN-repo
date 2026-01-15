@@ -1,8 +1,18 @@
-# CS411 - LEN PROJECT
+# LEN - Patient Support Platform
 
 ## 1. Project Description 
 
 LEN is a web-based platform designed to alleviate loneliness and improve mental well-being among patient communities by creating digital support groups. The platform enables patients with similar conditions and backgrounds to connect, share experiences, and provide mutual encouragement, fostering a sense of belonging and reducing feelings of isolation. This is transformative because it will enable scalable peer-to-peer patient support, which is currently a large issue for hospitals and other caretakers.
+
+## Repository Note
+
+This repository is a curated interview snapshot of a larger team project originally developed for a university software engineering course. During development, the original repository history was rewritten via a force-push, so the commit history here was intentionally reset for clarity and reviewability.
+
+## My Role
+
+I designed and implemented the core backend architecture, database schema,
+authentication and authorization flows, and moderation/crisis-reporting workflows.
+I also contributed to frontend integration, testing, and deployment setup.
 
 ## 2. INSTALLATION AND RUNNING INSTRUCTIONS
 
